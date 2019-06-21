@@ -83,3 +83,6 @@ req.then((data)=>{
 });
 req.send();
 ```
+
+#### Browser support
+The newer browser should work with it! The Internet Explorer wont work with Cajax!
