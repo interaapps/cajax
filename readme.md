@@ -4,8 +4,8 @@ CajaxJS is an lightweight JS Http client for everyone!
 ```javascript
 Cajax.post("/myapi", { information:"easy to use" })
 .then((data)=>{
-    console.log(data);
-}).catch((data)=>{
+    console.log(data.responseText);
+}).catch((data.responseText)=>{
     console.log("Something exploded!: "+data);
 }).send();
 ```
@@ -26,9 +26,9 @@ Cajax.post("/myapi", { information:"easy to use" })
 ```javascript
 Cajax.post("/myapi.php", {hello:"world"})
 .then((data)=>{
-    console.log(data);
+    console.log(data.responseText);
 }).catch((data)=>{
-    console.log("error"+data);
+    console.log("error"+data.responseText);
 }).send();
 ```
 
@@ -36,9 +36,9 @@ Cajax.post("/myapi.php", {hello:"world"})
 ```javascript
 Cajax.get("/myapi.php", {hello:"world"})
 .then((data)=>{
-    console.log(data);
+    console.log(data.responseText);
 }).catch((data)=>{
-    console.log("error"+data);
+    console.log("error"+data.responseText);
 }).send();
 ```
 
@@ -46,9 +46,9 @@ Cajax.get("/myapi.php", {hello:"world"})
 ```javascript
 Cajax.get("/myapi.php")
 .then((data)=>{
-    console.log(data);
+    console.log(data.responseText);
 }).catch((data)=>{
-    console.log("error"+data);
+    console.log("error"+data.responseText);
 }).send();
 ```
 
@@ -56,9 +56,9 @@ Cajax.get("/myapi.php")
 ```javascript
 Cajax.get("/myapi.php", {hello:"world"})
 .then((data)=>{
-    console.log(data);
+    console.log(data.responseText);
 }).catch((data)=>{
-    console.log("error"+data);
+    console.log("error"+data.responseText);
 }).custom((xhr)=> {
 	// You can use all XMLHttpRequest methods
 	xhr.send("custom things");
@@ -71,6 +71,6 @@ var $ = Cajax;
 
 $.get("/myapi")
 .then((data)=>{
-    console.log(data);
+    console.log(data.responseText);
 }).send();
 ```

@@ -5,9 +5,9 @@
 <script>
     Cajax.post("example_server.php", {hello:"world"})
     .then((data)=>{
-        console.log(data);
+        console.log(data.responseText);
     }).catch((data)=>{
-        console.log("error"+data);
+        console.log("error"+data.responseText);
     }).send();
     
     
@@ -16,15 +16,15 @@
         url: "example_server.php",
         method: "POST",
         data: {hello: "Hi!"}
-    }).then( (d) => {
-        console.log(d);
+    }).then( (data) => {
+        console.log(data.responseText);
     }).send();
     
     // GET
     Cajax.get("example_server.php", {hello:"world"})
     .then((data)=>{
-        console.log(data);
+        console.log(data.responseText);
     }).catch((data)=>{
-        console.log("error"+data);
+        console.log("error"+data.responseText);
     }).send();
 </script>

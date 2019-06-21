@@ -1,5 +1,10 @@
 class CajaxRequest {
     constructor(url,method, data=null, usinginput=false) {
+        // INIT
+        this.onResponseFunction = ()=>{};
+        this.catchFunction = ()=>{};
+        this.thenFunction = ()=>{};
+    
         if (data != null) {        
             var urlEncodedData = "";
             var urlEncodedDataPairs = [];
@@ -19,13 +24,18 @@ class CajaxRequest {
         if (usinginput && data != null) this.data = JSON.stringify(data);
     }
     
+    response (func) {
+        this.onResponseFunction = func;
+        return this;
+    }
+    
     then (func) {
-        this.then = func;
+        this.thenFunction = func;
         return this;
     }
     
     catch (func) {
-        this.catch = func;
+        this.catchFunction = func;
         return this;
     }
     
@@ -36,12 +46,12 @@ class CajaxRequest {
     
     send () {
     
-        (this.request).onload = ()=> {
-            
+        (this.request).onload = () => {
+            this.onResponseFunction(this.request);
             if ((this.request).readyState == 4 && ((this.request).status == "200" || (this.request).status == "201")) {
-		        this.then((this.request).responseText);
+		        this.thenFunction((this.request));
 	        } else {
-		        this.catch((this.request).responseText);
+		        this.catchFunction((this.request));
 	        }
         };
 
