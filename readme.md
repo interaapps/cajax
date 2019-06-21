@@ -2,7 +2,7 @@
 CajaxJS is an lightweight JS Http client for everyone!
 
 ```javascript
-cajax.post("/myapi", { information:"easy to use" })
+Cajax.post("/myapi", { information:"easy to use" })
 .then((data)=>{
     console.log(data);
 }).catch((data)=>{
@@ -24,7 +24,7 @@ cajax.post("/myapi", { information:"easy to use" })
 
 #### Simple POST request
 ```javascript
-cajax.post("/myapi.php", {hello:"world"})
+Cajax.post("/myapi.php", {hello:"world"})
 .then((data)=>{
     console.log(data);
 }).catch((data)=>{
@@ -34,7 +34,7 @@ cajax.post("/myapi.php", {hello:"world"})
 
 #### Simple GET request (with get parameters)
 ```javascript
-cajax.get("/myapi.php", {hello:"world"})
+Cajax.get("/myapi.php", {hello:"world"})
 .then((data)=>{
     console.log(data);
 }).catch((data)=>{
@@ -44,7 +44,7 @@ cajax.get("/myapi.php", {hello:"world"})
 
 #### Simple GET request (without get parameters)
 ```javascript
-cajax.get("/myapi.php")
+Cajax.get("/myapi.php")
 .then((data)=>{
     console.log(data);
 }).catch((data)=>{
@@ -54,7 +54,7 @@ cajax.get("/myapi.php")
 
 #### Customizable
 ```javascript
-cajax.get("/myapi.php", {hello:"world"})
+Cajax.get("/myapi.php", {hello:"world"})
 .then((data)=>{
     console.log(data);
 }).catch((data)=>{
@@ -67,7 +67,7 @@ cajax.get("/myapi.php", {hello:"world"})
 
 #### Own  classname
 ```javascript
-var $ = cajax;
+var $ = Cajax;
 
 $.get("/myapi")
 .then((data)=>{

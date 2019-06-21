@@ -1,9 +1,9 @@
-<script src="cajax.js"></script>
+<script src="Cajax.js"></script>
 
 <h1>Open the Dev-Console (F12)</h1>
 
 <script>
-    cajax.post("example_server.php", {hello:"world"})
+    Cajax.post("example_server.php", {hello:"world"})
     .then((data)=>{
         console.log(data);
     }).catch((data)=>{
@@ -12,7 +12,7 @@
     
     
     // JSON FORMAT 
-    cajax.ajax({
+    Cajax.ajax({
         url: "example_server.php",
         method: "POST",
         data: {hello: "Hi!"}
@@ -21,7 +21,7 @@
     }).send();
     
     // GET
-    cajax.get("example_server.php", {hello:"world"})
+    Cajax.get("example_server.php", {hello:"world"})
     .then((data)=>{
         console.log(data);
     }).catch((data)=>{

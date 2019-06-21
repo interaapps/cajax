@@ -1,4 +1,4 @@
-class cajaxRequest {
+class CajaxRequest {
     constructor(url,method, data=null, usinginput=false) {
         if (data != null) {        
             var urlEncodedData = "";
@@ -50,38 +50,38 @@ class cajaxRequest {
     }
 }
 
-class cajax {
+class Cajax {
     
     static post(url, data={}, usinginput=false) {
-        return new cajaxRequest(url, "POST", data, usinginput);
+        return new CajaxRequest(url, "POST", data, usinginput);
     }
     
     static get(url, data={}, usinginput=false) {
-        return new cajaxRequest(url, "GET", data, usinginput);
+        return new CajaxRequest(url, "GET", data, usinginput);
     }
     
     static put(url, data={}, usinginput=false) {
-        return new cajaxRequest(url, "POST", data, usinginput);
+        return new CajaxRequest(url, "POST", data, usinginput);
     }
     
     static delete(url) {
-        return new cajaxRequest(url, "DELETE", null);
+        return new CajaxRequest(url, "DELETE", null);
     }
     
     static trace(url) {
-        return new cajaxRequest(url, "TRACE", null);
+        return new CajaxRequest(url, "TRACE", null);
     }
     
     static connect(url) {
-        return new cajaxRequest(url, "CONNECT", null);
+        return new CajaxRequest(url, "CONNECT", null);
     }
     
     static options(url) {
-        return new cajaxRequest(url, "OPTIONS", null);
+        return new CajaxRequest(url, "OPTIONS", null);
     }
     
     static ajax (json) {
-        return new cajaxRequest(
+        return new CajaxRequest(
         ((json.url != null) ? json.url : false ), 
         ((json.method != null) ? json.method : false ), 
         ((json.data != null) ? json.data : false ),
