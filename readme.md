@@ -74,3 +74,12 @@ $.get("/myapi")
     console.log(data.responseText);
 }).send();
 ```
+
+#### Split
+```javascript
+var req = Cajax.post("example_server.php", {hello: "world"});
+req.then((data)=>{
+    console.log(data.responseText);
+});
+req.send();
+```
