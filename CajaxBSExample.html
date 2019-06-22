@@ -1,0 +1,12 @@
+<script src="Browsersupport.js"></script>
+
+<h1>Open the Dev-Console (F12)</h1>
+
+<script>
+    Cajax.get("example_server.php", {hello:"world"})
+    .then((data)=>{
+        console.log(data.responseText);
+    }).catch((data)=>{
+        console.log("error"+data.responseText);
+    }).send();
+</script>

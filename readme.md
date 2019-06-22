@@ -22,6 +22,10 @@ Cajax.post("/myapi", { information:"easy to use" })
 - OPTIONS
 - TRACE
 
+#### Browser support
+Cajax.js works with every newer browser (Except Internet Explorer)
+CajaxBS.js (Cajax Browser Support) should work with every browser, because its compiled with Babel. (It has got the same functions like Cajax!)
+
 #### Simple POST request
 ```javascript
 Cajax.post("/myapi.php", {hello:"world"})
@@ -83,6 +87,3 @@ req.then((data)=>{
 });
 req.send();
 ```
-
-#### Browser support
-The newer browser should work with it! The Internet Explorer wont work with Cajax!
