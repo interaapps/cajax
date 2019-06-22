@@ -1,3 +1,4 @@
+
 # CAJAX (*ClassedAjax*)
 CajaxJS is an lightweight JS Http client for everyone!
 
@@ -23,8 +24,9 @@ Cajax.post("/myapi", { information:"easy to use" })
 - TRACE
 
 #### Browser support
-Cajax.js works with every newer browser (Except Internet Explorer)
-CajaxBS.js (Cajax Browser Support) should work with every browser, because its compiled with Babel. (It has got the same functions like Cajax!)
+**Cajax.js** works with every newer browser (Except Internet Explorer)
+
+**CajaxBS.js** (Cajax Browser Support) should work with every browser, because its compiled with Babel. (It has got the same functions like Cajax!)
 
 #### Simple POST request
 ```javascript
