@@ -1,5 +1,5 @@
 
-# CAJAX (*ClassedAjax*)
+# CAJAX (*ClassedAjax*) 1.2
 CajaxJS is an lightweight JS Http client for everyone!
 
 ```javascript
@@ -51,6 +51,26 @@ Cajax.get("/myapi.php", {hello:"world"})
 #### Simple GET request (without get parameters)
 ```javascript
 Cajax.get("/myapi.php")
+.then((data)=>{
+    console.log(data.responseText);
+}).catch((data)=>{
+    console.log("error"+data.responseText);
+}).send();
+```
+
+#### Header
+```javascript
+Cajax.post("/myapi.php", {}, {header: {myheader: "HEAD"}})
+.then((data)=>{
+    console.log(data.responseText);
+}).catch((data)=>{
+    console.log("error"+data.responseText);
+}).send();
+```
+
+#### XHR Options (Example: withCredentials)
+```javascript
+Cajax.post("/myapi.php", {}, {withCredentials: true} })
 .then((data)=>{
     console.log(data.responseText);
 }).catch((data)=>{

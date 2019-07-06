@@ -13,11 +13,12 @@ var CajaxRequest =
 function () {
   function CajaxRequest(url, method) {
     var data = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-    var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+    var usinginput = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
 
     _classCallCheck(this, CajaxRequest);
 
-    // INIT
+    // INIT        
     this.onResponseFunction = function () {};
 
     this.catchFunction = function () {};
@@ -39,7 +40,13 @@ function () {
     this.method = method;
     this.contenttype = usinginput ? "application/json; charset=utf-8" : "application/x-www-form-urlencoded";
     var xhr = new XMLHttpRequest();
+    if (options != null) for (var options_key__cajax in options) {
+      xhr[options_key__cajax] = options[options_key__cajax];
+    }
     xhr.open(method, url + (this.method == "GET" ? "?" + this.data : ""));
+    if (options.header != null) for (var requestheader_obj__cajax in options.header) {
+      xhr.setRequestHeader(requestheader_obj__cajax, options.header[requestheader_obj__cajax]);
+    }
     xhr.setRequestHeader('Content-type', this.contenttype);
     this.request = xhr;
     if (usinginput && data != null) this.data = JSON.stringify(data);
@@ -103,47 +110,64 @@ function () {
     key: "post",
     value: function post(url) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var usinginput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      return new CajaxRequest(url, "POST", data, usinginput);
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      return new CajaxRequest(url, "POST", data, options, usinginput);
     }
   }, {
     key: "get",
     value: function get(url) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var usinginput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      return new CajaxRequest(url, "GET", data, usinginput);
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      return new CajaxRequest(url, "GET", data, options, usinginput);
     }
   }, {
     key: "put",
     value: function put(url) {
       var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var usinginput = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      return new CajaxRequest(url, "POST", data, usinginput);
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      return new CajaxRequest(url, "POST", data, options, usinginput);
     }
   }, {
     key: "delete",
     value: function _delete(url) {
-      return new CajaxRequest(url, "DELETE", null);
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      return new CajaxRequest(url, "DELETE", data, options, usinginput);
     }
   }, {
     key: "trace",
     value: function trace(url) {
-      return new CajaxRequest(url, "TRACE", null);
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      return new CajaxRequest(url, "TRACE", data, options, usinginput);
     }
   }, {
     key: "connect",
     value: function connect(url) {
-      return new CajaxRequest(url, "CONNECT", null);
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      return new CajaxRequest(url, "CONNECT", data, options, usinginput);
     }
   }, {
     key: "options",
     value: function options(url) {
-      return new CajaxRequest(url, "OPTIONS", null);
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      var _options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      var usinginput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+      return new CajaxRequest(url, "OPTIONS", data, _options, usinginput);
     }
   }, {
     key: "ajax",
     value: function ajax(json) {
-      return new CajaxRequest(json.url != null ? json.url : false, json.method != null ? json.method : false, json.data != null ? json.data : false, json.input != null ? json.input : false);
+      return new CajaxRequest(json.url != null ? json.url : false, json.method != null ? json.method : false, json.options != null ? json.options : false, json.data != null ? json.data : false, json.input != null ? json.input : false);
     }
   }]);
 
