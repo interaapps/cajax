@@ -1,0 +1,5 @@
+/.idea
+/node_modules
+example.html
+example_server.php
+.gitignore

@@ -1,6 +1,10 @@
 # CAJAX (*ClassedAjax*) Prajax (*PromiseAjax*) 2.0
 CajaxJS is an lightweight JS Http client for everyone!
 
+#### NPM
+```bash
+npm install cajaxjs
+```
 
 #### Cajax
 ```javascript
@@ -38,7 +42,7 @@ Prajax.post("/myapi", { information:"easy to use" })
 #### Browser support
 **Cajax.js** works with every newer browser (Except Internet Explorer)
 
-**CajaxBS.js** (Cajax Browser Support) should work with every browser, because its compiled with Babel. (It has got the same functions like Cajax!)
+**Babel** You can use Babel to get support for older browser
 
 #### Simple POST request
 ```javascript
