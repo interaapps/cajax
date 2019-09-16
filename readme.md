@@ -1,7 +1,8 @@
-
-# CAJAX (*ClassedAjax*) 1.2
+# CAJAX (*ClassedAjax*) Prajax (*PromiseAjax*) 2.0
 CajaxJS is an lightweight JS Http client for everyone!
 
+
+#### Cajax
 ```javascript
 Cajax.post("/myapi", { information:"easy to use" })
 .then((data)=>{
@@ -9,6 +10,17 @@ Cajax.post("/myapi", { information:"easy to use" })
 }).catch((data.responseText)=>{
     console.log("Something exploded!: "+data);
 }).send();
+```
+
+#### Prajax
+Now you can use `await`
+```javascript
+Prajax.post("/myapi", { information:"easy to use" })
+.then((data)=>{
+    console.log(data.responseText);
+}).catch((data.responseText)=>{
+    console.log("Something exploded!: "+data);
+});
 ```
 
 ### Features
