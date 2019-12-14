@@ -39,19 +39,27 @@ class CajaxRequest {
     }
 
     response (func) {
-        this.onResponseFunction = func;
+        this.onResponseFunction  = function(){
+            func(this.xhr);
+        }
         return this;
     }
 
     then (func) {
-        this.xhr.onload = func;
+        this.xhr.onload = function(){
+            func(this.xhr);
+        };
 
         return this;
     }
 
     catch (func) {
-        this.xhr.onerror = func;
-        this.xhr.onblocked = func;
+        this.xhr.onerror = function(){
+            func(this.xhr);
+        };
+        this.xhr.onblocked = function(){
+            func(this.xhr);
+        };
 
         return this;
     }
