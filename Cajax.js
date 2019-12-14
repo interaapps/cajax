@@ -34,7 +34,7 @@ class CajaxRequest {
         }
 
         xhr.setRequestHeader('Content-type', this.contenttype);
-        this.request = xhr;
+        this.xhr = xhr;
         if (options.usinginput && data != null) this.data = JSON.stringify(data);
     }
 
@@ -57,12 +57,12 @@ class CajaxRequest {
     }
 
     custom (func) {
-        func(this.request);
+        func(this.xhr);
         return this;
     }
 
     send () {
-        (this.request).send(this.data);
+        (this.xhr).send(this.data);
         return this;
     }
 }
