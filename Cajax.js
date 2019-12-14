@@ -39,14 +39,14 @@ class CajaxRequest {
     }
 
     response (func) {
-        this.onResponseFunction  = function(){
+        this.onResponseFunction  =  ()=>{
             func(this.xhr);
         }
         return this;
     }
 
     then (func) {
-        this.xhr.onload = function(){
+        this.xhr.onload = ()=>{
             func(this.xhr);
         };
 
@@ -54,10 +54,10 @@ class CajaxRequest {
     }
 
     catch (func) {
-        this.xhr.onerror = function(){
+        this.xhr.onerror = ()=>{
             func(this.xhr);
         };
-        this.xhr.onblocked = function(){
+        this.xhr.onblocked =  ()=>{
             func(this.xhr);
         };
 
@@ -181,4 +181,5 @@ class Prajax {
             ((json.input != null) ? json.input : false ));
     }
 }
+
 
