@@ -182,4 +182,9 @@ class Prajax {
     }
 }
 
+export {
+	Cajax,
+	Prajax
+}
 
+export default Cajax;
