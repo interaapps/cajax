@@ -1,25 +1,26 @@
 {
-  "name": "cajaxjs",
-  "version": "1.0.0",
-  "description": "CajaxJS is an lightweight JS Http client for everyone! (Promise support) ",
-  "main": "Cajax.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/interaapps/cajax.git"
-  },
-  "keywords": [
-    "Ajax",
-    "Cajax",
-    "Promise",
-    "ClassedAjax"
-  ],
-  "author": "InteraApps",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/interaapps/cajax/issues"
-  },
-  "homepage": "https://github.com/interaapps/cajax#readme"
+	"name": "cajaxjs",
+	"version": "1.0.0",
+	"description": "CajaxJS is an lightweight JS Http client for everyone! (Promise support) ",
+	"main": "./Cajax.js",
+	"types": "./Cajax.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/interaapps/cajax.git"
+	},
+	"keywords": [
+		"Ajax",
+		"Cajax",
+		"Promise",
+		"ClassedAjax"
+	],
+	"author": "InteraApps",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/interaapps/cajax/issues"
+	},
+	"homepage": "https://github.com/interaapps/cajax#readme"
 }
