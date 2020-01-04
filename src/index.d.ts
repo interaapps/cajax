@@ -1,5 +1,5 @@
-declare namespace Cajax {
-	class CajaxRequest {
+declare namespace NeoCajax {
+	class NeoCajaxRequest {
 		xhr: XMLHttpRequest;
 		method: string;
 		contenttype: string;
@@ -12,106 +12,106 @@ declare namespace Cajax {
 			options: object = null
 		): void;
 
-		response(func: void): XMLHttpRequest | CajaxRequest;
-		then(func: void): XMLHttpRequest | CajaxRequest;
-		catch(func: void): XMLHttpRequest | CajaxRequest;
-		custom(func: void): XMLHttpRequest | CajaxRequest;
-		send(func: void): CajaxRequest;
+		response(func: void): XMLHttpRequest | NeoCajaxRequest;
+		then(func: void): XMLHttpRequest | NeoCajaxRequest;
+		catch(func: void): XMLHttpRequest | NeoCajaxRequest;
+		custom(func: void): XMLHttpRequest | NeoCajaxRequest;
+		send(func: void): NeoCajaxRequest;
 	}
 
-	function PrajaxPromise(): Promise<CajaxRequest>;
+	function NeoPrajaxPromise(): Promise<NeoCajaxRequest>;
 
-	export class Cajax {
+	export class NeoCajax {
 		public static post(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): CajaxRequest;
+		): NeoCajaxRequest;
 		public static get(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): CajaxRequest;
+		): NeoCajaxRequest;
 		public static put(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): CajaxRequest;
+		): NeoCajaxRequest;
 		public static delete(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): CajaxRequest;
+		): NeoCajaxRequest;
 		public static trace(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): CajaxRequest;
+		): NeoCajaxRequest;
 		public static connect(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): CajaxRequest;
+		): NeoCajaxRequest;
 		public static options(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): CajaxRequest;
-		public static ajax(json: object): CajaxRequest;
+		): NeoCajaxRequest;
+		public static ajax(json: object): NeoCajaxRequest;
 	}
 
-	export class Prajax {
+	export class NeoPrajax {
 		public static post(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): PrajaxPromise;
+		): NeoPrajaxPromise;
 		public static get(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): PrajaxPromise;
+		): NeoPrajaxPromise;
 		public static put(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): PrajaxPromise;
+		): NeoPrajaxPromise;
 		public static delete(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): PrajaxPromise;
+		): NeoPrajaxPromise;
 		public static trace(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): PrajaxPromise;
+		): NeoPrajaxPromise;
 		public static connect(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): PrajaxPromise;
+		): NeoPrajaxPromise;
 		public static options(
 			url: string,
 			data: object | string = {},
 			options: object = {},
 			usinginput: boolean = false
-		): PrajaxPromise;
-		public static ajax(json: object): PrajaxPromise;
+		): NeoPrajaxPromise;
+		public static ajax(json: object): NeoPrajaxPromise;
 	}
 
-	export default Cajax;
+	export default NeoCajax;
 }

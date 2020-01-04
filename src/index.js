@@ -1,4 +1,4 @@
-class CajaxRequest {
+class NeoCajaxRequest {
 	constructor(url, method, data = null, options = {}) {
 		// INIT
 		this.onResponseFunction = () => {};
@@ -26,16 +26,16 @@ class CajaxRequest {
 		var xhr = new XMLHttpRequest();
 
 		if (options != null)
-			for (var options_key__cajax in options) {
-				xhr[options_key__cajax] = options[options_key__cajax];
+			for (var options_key__NeoCajax in options) {
+				xhr[options_key__NeoCajax] = options[options_key__NeoCajax];
 			}
 
 		xhr.open(method, url + (this.method == 'GET' ? '?' + this.data : ''));
 		if (options.header != null)
-			for (var requestheader_obj__cajax in options.header) {
+			for (var requestheader_obj__NeoCajax in options.header) {
 				xhr.setRequestHeader(
-					requestheader_obj__cajax,
-					options.header[requestheader_obj__cajax]
+					requestheader_obj__NeoCajax,
+					options.header[requestheader_obj__NeoCajax]
 				);
 			}
 
@@ -82,9 +82,9 @@ class CajaxRequest {
 	}
 }
 
-function PrajaxPromise(url, method, data = null, options = {}) {
+function NeoPrajaxPromise(url, method, data = null, options = {}) {
 	return new Promise((done, error) => {
-		var request = new CajaxRequest(url, method, data, options);
+		var request = new NeoCajaxRequest(url, method, data, options);
 		request.then(resp => {
 			done(resp);
 		});
@@ -93,49 +93,49 @@ function PrajaxPromise(url, method, data = null, options = {}) {
 			error(resp);
 		});
 
-		if (typeof options.cajax != 'undefined') {
-			if (typeof options.cajax.custom != 'undefined')
-				request.cajax.custom(options.cajax.custom);
+		if (typeof options.NeoCajax != 'undefined') {
+			if (typeof options.NeoCajax.custom != 'undefined')
+				request.NeoCajax.custom(options.NeoCajax.custom);
 
-			if (typeof options.cajax.response != 'undefined')
-				request.cajax.response(options.cajax.response);
+			if (typeof options.NeoCajax.response != 'undefined')
+				request.NeoCajax.response(options.NeoCajax.response);
 		}
 
 		request.send();
 	});
 }
 
-class Cajax {
+class NeoCajax {
 	static post(url, data = {}, options = {}, usinginput = false) {
-		return new CajaxRequest(url, 'POST', data, options, usinginput);
+		return new NeoCajaxRequest(url, 'POST', data, options, usinginput);
 	}
 
 	static get(url, data = {}, options = {}, usinginput = false) {
-		return new CajaxRequest(url, 'GET', data, options, usinginput);
+		return new NeoCajaxRequest(url, 'GET', data, options, usinginput);
 	}
 
 	static put(url, data = {}, options = {}, usinginput = false) {
-		return new CajaxRequest(url, 'POST', data, options, usinginput);
+		return new NeoCajaxRequest(url, 'POST', data, options, usinginput);
 	}
 
 	static delete(url, data = {}, options = {}, usinginput = false) {
-		return new CajaxRequest(url, 'DELETE', data, options, usinginput);
+		return new NeoCajaxRequest(url, 'DELETE', data, options, usinginput);
 	}
 
 	static trace(url, data = {}, options = {}, usinginput = false) {
-		return new CajaxRequest(url, 'TRACE', data, options, usinginput);
+		return new NeoCajaxRequest(url, 'TRACE', data, options, usinginput);
 	}
 
 	static connect(url, data = {}, options = {}, usinginput = false) {
-		return new CajaxRequest(url, 'CONNECT', data, options, usinginput);
+		return new NeoCajaxRequest(url, 'CONNECT', data, options, usinginput);
 	}
 
 	static options(url, data = {}, options = {}, usinginput = false) {
-		return new CajaxRequest(url, 'OPTIONS', data, options, usinginput);
+		return new NeoCajaxRequest(url, 'OPTIONS', data, options, usinginput);
 	}
 
 	static ajax(json) {
-		return new CajaxRequest(
+		return new NeoCajaxRequest(
 			json.url != null ? json.url : false,
 			json.method != null ? json.method : false,
 			json.options != null ? json.options : false,
@@ -145,37 +145,37 @@ class Cajax {
 	}
 }
 
-class Prajax {
+class NeoPrajax {
 	static post(url, data = {}, options = {}, usinginput = false) {
-		return PrajaxPromise(url, 'POST', data, options, usinginput);
+		return NeoPrajaxPromise(url, 'POST', data, options, usinginput);
 	}
 
 	static get(url, data = {}, options = {}, usinginput = false) {
-		return PrajaxPromise(url, 'GET', data, options, usinginput);
+		return NeoPrajaxPromise(url, 'GET', data, options, usinginput);
 	}
 
 	static put(url, data = {}, options = {}, usinginput = false) {
-		return PrajaxPromise(url, 'POST', data, options, usinginput);
+		return NeoPrajaxPromise(url, 'POST', data, options, usinginput);
 	}
 
 	static delete(url, data = {}, options = {}, usinginput = false) {
-		return PrajaxPromise(url, 'DELETE', data, options, usinginput);
+		return NeoPrajaxPromise(url, 'DELETE', data, options, usinginput);
 	}
 
 	static trace(url, data = {}, options = {}, usinginput = false) {
-		return PrajaxPromise(url, 'TRACE', data, options, usinginput);
+		return NeoPrajaxPromise(url, 'TRACE', data, options, usinginput);
 	}
 
 	static connect(url, data = {}, options = {}, usinginput = false) {
-		return PrajaxPromise(url, 'CONNECT', data, options, usinginput);
+		return NeoPrajaxPromise(url, 'CONNECT', data, options, usinginput);
 	}
 
 	static options(url, data = {}, options = {}, usinginput = false) {
-		return PrajaxPromise(url, 'OPTIONS', data, options, usinginput);
+		return NeoPrajaxPromise(url, 'OPTIONS', data, options, usinginput);
 	}
 
 	static ajax(json) {
-		return PrajaxPromise(
+		return NeoPrajaxPromise(
 			json.url != null ? json.url : false,
 			json.method != null ? json.method : false,
 			json.options != null ? json.options : false,
@@ -185,6 +185,6 @@ class Prajax {
 	}
 }
 
-export { Cajax, Prajax };
+export { NeoCajax, NeoPrajax };
 
-export default Cajax;
+export default NeoCajax;

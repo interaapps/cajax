@@ -1,12 +1,12 @@
 const windowConfig = {
 	entry: './src/index.js',
 	output: {
-		filename: './cajax.min.js',
+		filename: './neocajax.min.js',
 		libraryTarget: 'window'
 	}
 };
 
-const upmConfig = {
+const umdConfig = {
 	entry: './src/index.js',
 	output: {
 		filename: './main.js',
@@ -14,4 +14,4 @@ const upmConfig = {
 	}
 };
 
-module.exports = [upmConfig, windowConfig];
+module.exports = [umdConfig, windowConfig];
