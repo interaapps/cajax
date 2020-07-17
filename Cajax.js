@@ -1,7 +1,5 @@
 class CajaxRequest {
 
-    xhr;
-
     constructor(url,method, data=null, options={}) {
         // INIT
         this.onResponseFunction = ()=>{};
