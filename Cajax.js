@@ -16,8 +16,8 @@ class CajaxRequest {
                 for(name in data) {
                     urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
                 }
+                this.data = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
             }
-            this.data = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
         } else this.data = null;
 
         this.method = method;
