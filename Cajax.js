@@ -56,6 +56,14 @@ class CajaxRequest {
         return this;
     }
 
+    progress (func) {
+        this.xhr.upload.onprogress = (e) => {
+            func(this.xhr, (e.loaded / e.total) * 100);
+        };
+
+        return this;
+    }
+
     catch (func) {
         this.xhr.onerror = ()=>{
             func(this.xhr);
