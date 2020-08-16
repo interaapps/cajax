@@ -7,14 +7,19 @@ class CajaxRequest {
         this.thenFunction = ()=>{};
 
         if (data != null) {
-            var urlEncodedData = "";
-            var urlEncodedDataPairs = [];
-            var name;
-            for(name in data) {
-                urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
+            if (data instanceof FormData) {
+                this.data = data;
+            } else {
+                var urlEncodedData = "";
+                var urlEncodedDataPairs = [];
+                var name;
+                for(name in data) {
+                    urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(data[name]));
+                }
             }
             this.data = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
         } else this.data = null;
+
         this.method = method;
         this.contenttype = (options.usinginput) ? "application/json; charset=utf-8" : "application/x-www-form-urlencoded";
 
