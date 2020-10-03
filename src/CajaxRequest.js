@@ -25,7 +25,7 @@ class CajaxRequest {
         this.method = method;
         
         if (!(data instanceof FormData))
-        this.contenttype = (options.usinginput) ? "application/json; charset=utf-8" : "application/x-www-form-urlencoded";
+        this.contenttype = (options.usinginput || options.json) ? "application/json; charset=utf-8" : "application/x-www-form-urlencoded";
 
         var xhr = new XMLHttpRequest();
 
@@ -35,13 +35,13 @@ class CajaxRequest {
             }
 
 
-        xhr.open(method, url+((this.method=="GET")? "?"+this.data : "" ));
+        xhr.open(method, url+(((this.method=="GET" || this.method=="DELETE") && Object.keys(data).length !== 0)? "?"+this.data : "" ));
         if (options.header != null) for (var requestheader_obj__cajax in options.header) {
             xhr.setRequestHeader(requestheader_obj__cajax, options.header[requestheader_obj__cajax]);
         }
 
         this.xhr = xhr;
-        if (options.usinginput && data != null) this.data = JSON.stringify(data);
+        if ((options.usinginput || options.json) && data != null) this.data = JSON.stringify(data);
     }
 
     response (func) {
