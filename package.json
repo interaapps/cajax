@@ -1,10 +1,10 @@
 {
   "name": "cajaxjs",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "CajaxJS is an lightweight JS Http client for everyone! (Promise support) ",
-  "main": "Cajax.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --config webpack.config.js --production"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,13 @@
   "bugs": {
     "url": "https://github.com/interaapps/cajax/issues"
   },
-  "homepage": "https://github.com/interaapps/cajax#readme"
+  "homepage": "https://github.com/interaapps/cajax#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {}
 }
