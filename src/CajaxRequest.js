@@ -5,6 +5,7 @@ class CajaxRequest {
         this.onResponseFunction = ()=>{};
         this.catchFunction = ()=>{};
         this.thenFunction = ()=>{};
+        this.params = data;
         this.method = method;
         this.url = url;
         this.fetch = null;
@@ -100,7 +101,7 @@ class CajaxRequest {
             }, ...this.options};
             if (!(this.method == "GET" || this.method == "HEAD"))
                 fetchData.body = this.data;
-            this.fetch = fetch(this.url, fetchData)
+            this.fetch = fetch(this.url+(((this.method=="GET" || this.method=="DELETE") && Object.keys(this.params).length !== 0)? "?"+this.data : "" ), fetchData)
                 .then(res=>{
                     res.text()
                         .then((body)=>{

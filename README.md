@@ -10,7 +10,7 @@ npm install cajaxjs
 ```
 <script src="https://js.gjni.eu/cajax.js"></script>
 <!-- OR -->
-<script src="https://js.gjni.eu/cajax/1.0.6.js"></script>
+<script src="https://js.gjni.eu/cajax/1.1.1.js"></script>
 ```
 
 ## CDN (module)
