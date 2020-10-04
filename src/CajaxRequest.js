@@ -77,20 +77,56 @@ class CajaxRequest {
     }
 
     send () {
+        let responseTemplate = {
+            resType: "none",
+            res: null, // ORIGINAL RESPONSE (fetch or xhrhttprequest)
+            response: null,
+            responseText: null,
+            ok: false,
+            status: null,
+            statusText: "",
+            url: this.url,
+            res: null,
+            json(){
+                return JSON.parse(this.responseText)
+            }
+        }
         if (CajaxRequest.useFetch) {
             let fetchData = {...{
                 method: this.method,
                 headers: {
-                    'content-type': this.contenttype
+                    'Content-Type': this.contenttype
                 }
             }, ...this.options};
-            if (this.method == "GET" || this.method == "HEAD")
-                fetchData.body = this.body;
+            if (!(this.method == "GET" || this.method == "HEAD"))
+                fetchData.body = this.data;
             this.fetch = fetch(this.url, fetchData)
                 .then(res=>{
-                    this.thenFunction(res)
+                    res.text()
+                        .then((body)=>{
+                            this.thenFunction({...responseTemplate, ...{responseText: body, response: body}, ...{
+                                resType: "fetch",
+                                res: res,
+                                status: res.status,
+                                statusText: res.statusText,
+                                url: res.url,
+                                ok: res.ok
+                            }})
+                        })
+                        .catch((body)=>this.thenFunction({...responseTemplate, ...{responseText: body, response: body}, ...{
+                            resType: "fetch",
+                            res: res,
+                            status: res.status,
+                            statusText: res.statusText,
+                            url: res.url,
+                            ok: res.ok
+                        }}))
                 }).catch(res=>{
-                    this.catchFunction(res)
+                    res.text()
+                        .then((body)=>{
+                            this.catchFunction({...responseTemplate, ...{responseText: body, response: body}, ...res})
+                        })
+                        .catch((body)=>this.catchFunction({...responseTemplate, ...res}))
                 })
         } else {
 
@@ -107,14 +143,34 @@ class CajaxRequest {
 
             this.xhr.setRequestHeader('Content-type', this.contenttype);
             (this.xhr).send(this.data);
-            this.xhr.onerror = ()=>{
-                this.catchFunction(this.xhr);
-            };
-            this.xhr.onblocked =  ()=>{
-                this.catchFunction(this.xhr);
-            };
+
+            let catchFunc = ()=>{
+                this.catchFunction({...responseTemplate, ...{
+                    resType: "xhr",
+                    res: this.xhr,
+                    status: this.xhr.status,
+                    statusText: this.xhr.statusText,
+                    url: this.xhr.responseURL,
+                    ok: false,
+                    responseText: this.xhr.responseText,
+                    response: this.xhr.response
+                }})
+            }
+
+            this.xhr.onerror = ()=>{ catchFunc() };
+            this.xhr.onblocked =  ()=>{ catchFunc() };
+            
             this.xhr.onload = ()=>{
-                this.thenFunction(this.xhr);
+                this.thenFunction({...responseTemplate, ...{
+                    resType: "xhr",
+                    res: this.xhr,
+                    status: this.xhr.status,
+                    statusText: this.xhr.statusText,
+                    url: this.xhr.responseURL,
+                    ok: true,
+                    responseText: this.xhr.responseText,
+                    response: this.xhr.response
+                }})
             };
         }
 
