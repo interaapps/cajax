@@ -17,7 +17,7 @@ npm install cajaxjs
 test.js
 ```javascript
 import Cajax from 'https://js.gjni.eu/cajax/src/Cajax.js'
-// or import { Cajax } from 'https://js.gjni.eu/cajax/src/ecma.js'
+// or import { Cajax } from 'https://js.gjni.eu/cajax/index.js'
 
 Cajax.get("/").send()
 // note that you have to use the script tag with type="module"
