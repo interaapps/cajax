@@ -1,0 +1,20 @@
+{
+    "name": "cajax",
+    "description": "Cajax/Prajax is an lightweight JS Http client for everyone!",
+    "version": "1.1.1",
+    "bump": "patch",
+    "entry": "./index.js",
+    "unstable": false,
+    "unlisted": false,
+    "repository": "https://github.com/your_name/your_project",
+    "files": [
+        "./index.js",
+        "./src/**/*",
+        "./README.md"
+    ],
+    "ignore": [
+        ".git"
+    ],
+    "checkInstallation": true,
+    "checkAll": false
+}
