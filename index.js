@@ -6,3 +6,4 @@ import PrajaxClient from "./src/PrajaxClient.js";
 
 
 export default {Cajax, Prajax, PrajaxPromise, CajaxRequest, PrajaxClient}
+export {Cajax, Prajax, PrajaxPromise, CajaxRequest, PrajaxClient}

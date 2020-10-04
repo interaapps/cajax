@@ -1,5 +1,3 @@
-const Cajax = require("./Cajax");
-
 class CajaxRequest {
 
     constructor(url,method, data=null, options={}) {

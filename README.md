@@ -13,6 +13,17 @@ npm install cajaxjs
 <script src="https://js.gjni.eu/cajax/1.0.6.js"></script>
 ```
 
+## CDN (module)
+test.js
+```javascript
+import Cajax from 'https://js.gjni.eu/cajax/src/Cajax.js'
+// or import { Cajax } from 'https://js.gjni.eu/cajax/src/ecma.js'
+
+Cajax.get("/").send()
+// note that you have to use the script tag with type="module"
+```
+
+
 #### Cajax
 ```javascript
 Cajax.post("/myapi", { information:"easy to use" })
