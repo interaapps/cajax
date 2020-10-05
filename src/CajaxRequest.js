@@ -114,7 +114,7 @@ class CajaxRequest {
                                 ok: res.ok
                             }})
                         })
-                        .catch((body)=>this.thenFunction({...responseTemplate, ...{responseText: body, response: body}, ...{
+                        .catch(()=>this.catchFunction({...responseTemplate, ...{
                             resType: "fetch",
                             res: res,
                             status: res.status,
@@ -123,11 +123,7 @@ class CajaxRequest {
                             ok: res.ok
                         }}))
                 }).catch(res=>{
-                    res.text()
-                        .then((body)=>{
-                            this.catchFunction({...responseTemplate, ...{responseText: body, response: body}, ...res})
-                        })
-                        .catch((body)=>this.catchFunction({...responseTemplate, ...res}))
+                    this.catchFunction({...responseTemplate, ...{res: res}})
                 })
         } else {
 
@@ -158,8 +154,8 @@ class CajaxRequest {
                 }})
             }
 
-            this.xhr.onerror = ()=>{ catchFunc() };
-            this.xhr.onblocked =  ()=>{ catchFunc() };
+            this.xhr.onerror = catchFunc;
+            this.xhr.onblocked =  catchFunc;
             
             this.xhr.onload = ()=>{
                 this.thenFunction({...responseTemplate, ...{
