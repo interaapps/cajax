@@ -1,4 +1,4 @@
-# CAJAX (*ClassedAjax*) Prajax (*PromiseAjax*) 1.1.4
+# CAJAX (*ClassedAjax*) Prajax (*PromiseAjax*) 1.1.6
 CajaxJS is an lightweight JS Http client for everyone!
 
 #### NPM
