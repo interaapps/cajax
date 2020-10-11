@@ -1,4 +1,4 @@
-# CAJAX (*ClassedAjax*) Prajax (*PromiseAjax*) 1.1.7
+# CAJAX (*ClassedAjax*) Prajax (*PromiseAjax*) 2.0.0
 CajaxJS is an lightweight JS Http client for everyone!
 
 #### NPM
@@ -8,16 +8,16 @@ npm install cajaxjs
 
 ### CDN
 ```
-<script src="https://js.gjni.eu/cajax.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cajaxjs@x/dist/cajax.js"></script>
 <!-- OR -->
-<script src="https://js.gjni.eu/cajax/1.1.4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cajaxjs@2.0.0/dist/cajax.js"></script>
 ```
 
 ## CDN (module)
 test.js
 ```javascript
-import Cajax from 'https://js.gjni.eu/cajax/src/Cajax.js'
-// or import { Cajax } from 'https://js.gjni.eu/cajax/index.js'
+import Cajax from 'https://cdn.jsdelivr.net/npm/cajaxjs@2.0.0/src/Cajax.js'
+// or import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@2.0.0/index.js'
 
 Cajax.get("/").send()
 // note that you have to use the script tag with type="module"
