@@ -11,7 +11,7 @@ export default class Prajax {
     }
 
     static put(url, data={}, options={}) {
-        return PrajaxPromise(url, "POST", data, options);
+        return PrajaxPromise(url, "PUT", data, options);
     }
 
     static delete(url, data={}, options={}) {
