@@ -1,7 +1,7 @@
 {
   "name": "cajax",
   "description": "Cajax/Prajax is an lightweight JS Http client for everyone!",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "bump": "patch",
   "entry": "index.js",
   "unstable": false,

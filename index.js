@@ -1,9 +1,9 @@
 import Cajax from "./src/Cajax.js";
-import Prajax from "./src/Prajax.js";
-import PrajaxPromise from "./src/PrajaxPromise.js";
 import CajaxRequest from "./src/CajaxRequest.js";
-import PrajaxClient from "./src/PrajaxClient.js";
+import CajaxResponse from "./src/CajaxResponse.js";
+import FetchRequestProvider from "./src/requestprovider/FetchRequestProvider.js";
+import RequestProvider from "./src/requestprovider/RequestProvder.js";
+import XMLHttpRequestProvider from "./src/requestprovider/XMLHttpRequestProvider.js";
 
-
-export default {Cajax, Prajax, PrajaxPromise, CajaxRequest, PrajaxClient}
-export {Cajax, Prajax, PrajaxPromise, CajaxRequest, PrajaxClient}
+export default {Cajax, CajaxResponse, CajaxRequest, RequestProvider, XMLHttpRequestProvider, FetchRequestProvider}
+export {Cajax, CajaxResponse, CajaxRequest, RequestProvider, XMLHttpRequestProvider, FetchRequestProvider}

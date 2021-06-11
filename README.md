@@ -1,4 +1,4 @@
-# CAJAX (*ClassedAjax*) Prajax (*PromiseAjax*) 2.0.0
+# CAJAX (*ClassedAjax*) 3.0.0
 CajaxJS is an lightweight JS Http client for everyone!
 
 #### NPM
@@ -10,165 +10,91 @@ npm install cajaxjs
 ```
 <script src="https://cdn.jsdelivr.net/npm/cajaxjs@x/dist/cajax.js"></script>
 <!-- OR -->
-<script src="https://cdn.jsdelivr.net/npm/cajaxjs@2.0.0/dist/cajax.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cajaxjs@3.0.0/dist/cajax.js"></script>
 ```
 
-## CDN (module)
+## CDN (module, works for Deno too)
 test.js
 ```javascript
-import Cajax from 'https://cdn.jsdelivr.net/npm/cajaxjs@2.0.0/src/Cajax.js'
-// or import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@2.0.0/index.js'
+import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.0/index.js'
 
-Cajax.get("/").send()
-// note that you have to use the script tag with type="module"
+new Cajax()
+    .get("https://interaapps.de")
+    .then(res => {
+        console.log(res.text())
+    })
+```
+
+## Example Usage
+```js
+
+import { Cajax, CajaxRequest, CajaxResponse, FetchRequestProvider } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.0/index.js'
+
+const client = new Cajax()
+
+// There are currently two RequestProvider. Cajax automaticly selects the best one for the user
+client.requestProvider = new FetchRequestProvider()
+
+// Await needs to be in a async scope
+const response = await client.get("https://interaapps.de")
+const responseText = await response.text();
+console.log(responseText)
+
+// Using query parameters
+client.get("https://interaapps.de", {
+    hello: "world"
+})
+    .then(res=>text())
+    .then(res=>{
+        console.log("Hello world")
+    })
+
+// Adding headers
+client.get("https://interaapps.de", {
+    hello: "world"
+}, {
+    headers: {
+        hello: "World (But this is a header)"
+    }
+})
+
+// Posting. The second parameter is the data
+client.post("https://interaapps.de", {
+    hello: "world"
+})
+```
+
+## options
+```js
+/*
+    You can either set your options into the third parameter of a request or just set it for the whole client
+*/
+
+const client = new Cajax("https://interaapps.de/base_url", {
+    headers: {
+        hello: "World"
+    },
+
+    // Might be interesting for PHP-Developers
+    contentType: "application/x-www-form-urlencoded"
+})
+
+// Or you can set it here
+client.setHeader("hello", "world")
+
+// Helper
+client.bearer("KEY")
+
+// You are always converting data to json or check it before using it? Then you can use promiseInterceptor
+// This will now convert every following res to a json object.
+client.promiseInterceptor = res => res.json()
 ```
 
 
-#### Cajax
-```javascript
-Cajax.post("/myapi", { information:"easy to use" })
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data.responseText)=>{
-    console.log("Something exploded!: "+data);
-}).send();
-```
-
-#### Prajax
-Now you can use `await`
-```javascript
-Prajax.post("/myapi", { information:"easy to use" })
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data.responseText)=>{
-    console.log("Something exploded!: "+data);
-});
-```
-
-### PrajaxClient
-```javascript
-let client = new PrajaxClient({
-   baseUrl: "https://interaapps.de",
-   options: {
-       header: {"x-key": "asd"}
-   }
-});
-
-// USING application/json for post requests.
-client.options.json = true;
-
-client.get("/").then(res=>{
-    console.log(res.responseText);
-});
-```
-
-### Features
-- Many request methods
-- Fully customizable
-
-### Request methods
-- GET
-- POST
-- PUT
-- DELETE
-- OPTIONS
-- TRACE
-
-#### Browser support
-**Cajax.js** works with every newer browser (Except Internet Explorer)
-
-**Babel** You can use Babel to get support for older browser
-
-#### Simple POST request
-```javascript
-Cajax.post("/myapi.php", {hello:"world"})
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data)=>{
-    console.log("error"+data.responseText);
-}).send();
-```
-
-#### Simple GET request (with get parameters)
-```javascript
-Cajax.get("/myapi.php", {hello:"world"})
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data)=>{
-    console.log("error"+data.responseText);
-}).send();
-```
-
-#### Simple GET request (without get parameters)
-```javascript
-Cajax.get("/myapi.php")
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data)=>{
-    console.log("error"+data.responseText);
-}).send();
-```
-
-#### Header
-```javascript
-Cajax.post("/myapi.php", {}, {header: {myheader: "HEAD"}})
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data)=>{
-    console.log("error"+data.responseText);
-}).send();
-```
-
-#### XHR Options (Example: withCredentials)
-```javascript
-Cajax.post("/myapi.php", {}, {withCredentials: true} })
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data)=>{
-    console.log("error"+data.responseText);
-}).send();
-```
-
-#### Customizable
-```javascript
-Cajax.get("/myapi.php", {hello:"world"})
-.then((data)=>{
-    console.log(data.responseText);
-}).catch((data)=>{
-    console.log("error"+data.responseText);
-}).custom((xhr)=> {
-	// You can use all XMLHttpRequest methods
-	xhr.send("custom things");
-}).send();
-```
-
-#### Own  classname
-```javascript
-var $ = Cajax;
-
-$.get("/myapi")
-.then((data)=>{
-    console.log(data.responseText);
-}).send();
-```
-
-#### Split
-```javascript
-var req = Cajax.post("example_server.php", {hello: "world"});
-req.then((data)=>{
-    console.log(data.responseText);
-});
-req.send();
-```
-
-
-## TypeScript (Deno)
+## Typescript usage
 ```typescript
-import Prajax from "https://js.gjni.eu/cajax/src/Prajax.js";
-import CajaxResponse from 'https://js.gjni.eu/cajax/src/CajaxResponse.ts';
-
-Prajax.get("https://interaapps.de")
+new Cajax().get("https://interaapps.de")
     .then((res: CajaxResponse)=>{
-        console.log("Hello "+res.json().hello)
+        console.log("Hello "+(await res.json()).name)
     })
 ```

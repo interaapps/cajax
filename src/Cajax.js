@@ -1,46 +1,138 @@
-import CajaxRequest from "./CajaxRequest.js";
+import CajaxRequest from "./CajaxRequest.js"
+import FetchRequestProvider from "./requestprovider/FetchRequestProvider.js"
+import XMLHttpRequestProvider from "./requestprovider/XMLHttpRequestProvider.js"
 
 class Cajax {
+    constructor(baseUrl = null, defaultRequestOptions={}){
+        this.baseUrl = baseUrl
+        this.promiseInterceptor = (promise)=>{
+            return promise
+        }
 
-    static post(url, data={}, options={}) {
-        return new CajaxRequest(url, "POST", data, options);
+        this.defaultRequestOptions = defaultRequestOptions
+
+        if ('fetch' in window)
+            this.requestProvider = new FetchRequestProvider()
+        else
+            this.requestProvider = new XMLHttpRequestProvider()
     }
 
-    static get(url, data={}, options={}) {
-        return new CajaxRequest(url, "GET", data, options);
+    request(method, url, request = {}){
+        if (this.baseUrl)
+            this.baseUrl+(url.startsWith("/") ? url : "/"+url )
+        request = {...(
+            request instanceof CajaxRequest 
+                ? {...this.defaultRequestOptions,...request} 
+                : {
+                    ...(new CajaxRequest()), ...this.defaultRequestOptions, ...request
+                })}
+        
+        const body = request.body
+
+        if (request.query && typeof request.query == 'object' && Object.keys(request.query).length > 0) {
+            if (!url.includes('?'))
+                url += '?'
+            console.log(request.query);
+            var urlEncodedDataPairs = [];
+            for(const name in request.query)
+                urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(request.query[name]));
+            url += urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+        }
+
+        if (body instanceof FormData) {
+            request.body = data
+            if (!request.contentType)
+                request.contentType = "application/x-www-form-urlencoded"
+        } else if (typeof body == 'string') {
+            request.body = data
+        } else if (typeof body == 'object') {
+            if (!request.contentType)
+                request.contentType = "application/json"
+
+            if (request.contentType == "application/json")
+                request.body = JSON.stringify(body)
+            else if (request.contentType == "application/x-www-form-urlencoded") {
+                var urlEncodedDataPairs = [];
+                for(const name in body)
+                    urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(body[name]));
+                request.body = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+            }
+        }
+
+        return new Promise(async (then, err)=>{
+            const promise = this.requestProvider.handle(method, url, request)
+            
+            promise
+                   .then(this.promiseInterceptor)
+                   .then(then)
+                   .catch(err)
+        })
     }
 
-    static put(url, data={}, options={}) {
-        return new CajaxRequest(url, "POST", data, options);
+
+
+    get(url, query={}, request={}){
+        request.query = query
+        console.log("YE");
+        console.log(query);
+        return this.request("GET", url, request)
     }
 
-    static delete(url, data={}, options={}) {
-        return new CajaxRequest(url, "DELETE", data, options);
+    delete(url, query={}, request={}){
+        request.query = query
+        return this.request("DELETE", url, request)
     }
 
-    static trace(url, data={}, options={}) {
-        return new CajaxRequest(url, "TRACE", data, options);
+    post(url, body=null, request={}){
+        request.body = body
+        return this.request("POST", url, request)
     }
 
-    static connect(url, data={}, options={}) {
-        return new CajaxRequest(url, "CONNECT", data, options);
+    put(url, body=null, request={}){
+        request.body = body
+        return this.request("PUT", url, request)
     }
 
-    static options(url, data={}, options={}) {
-        return new CajaxRequest(url, "OPTIONS", data, options);
+    connect(url, body=null, request={}){
+        request.body = body
+        return this.request("CONNECT", url, request)
     }
 
-    static update(url, data={}, options={}) {
-        return new CajaxRequest(url, "UPDATE", data, options);
+    head(url, body=null, request={}){
+        request.body = body
+        return this.request("HEAD", url, request)
     }
 
-    static ajax (json) {
-        return new CajaxRequest(
-            ((json.url != null) ? json.url : false ),
-            ((json.method != null) ? json.method : false ),
-            ((json.options != null) ? json.options : false ),
-            ((json.data != null) ? json.data : false ));
+    patch(url, body=null, request={}){
+        request.body = body
+        return this.request("PATCH", url, request)
+    }
+
+    options(url, body=null, request={}){
+        request.body = body
+        return this.request("OPTIONS", url, request)
+    }
+    
+    trace(url, body=null, request={}){
+        request.body = body
+        return this.request("TRACE", url, request)
+    }
+
+    
+    setHeader(name, value){
+        this.defaultRequestOptions.headers[name] = value
+        return this
+    }
+
+    setContentType(value){
+        this.defaultRequestOptions.contentType = value
+        return this
+    }
+
+    bearer(value){
+        this.defaultRequestOptions.headers["Authentication"] = "Bearer "+value
+        return this
     }
 }
 
-export default Cajax;
+export default Cajax
