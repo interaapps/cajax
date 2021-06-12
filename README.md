@@ -20,8 +20,8 @@ import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.0/index.js'
 
 new Cajax()
     .get("https://interaapps.de")
-    .then(res => {
-        console.log(res.text())
+    .then(async (res) => {
+        console.log(await res.text())
     })
 ```
 
@@ -44,7 +44,7 @@ console.log(responseText)
 client.get("https://interaapps.de", {
     hello: "world"
 })
-    .then(res=>text())
+    .then(res=>res.text())
     .then(res=>{
         console.log("Hello world")
     })
@@ -94,7 +94,7 @@ client.promiseInterceptor = res => res.json()
 ## Typescript usage
 ```typescript
 new Cajax().get("https://interaapps.de")
-    .then((res: CajaxResponse)=>{
+    .then(await (res: CajaxResponse) => {
         console.log("Hello "+(await res.json()).name)
     })
 ```
