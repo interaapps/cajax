@@ -19,7 +19,7 @@ class Cajax {
 
     request(method, url, request = {}){
         if (this.baseUrl)
-            this.baseUrl+(url.startsWith("/") ? url : "/"+url )
+            url = this.baseUrl+(url.startsWith("/") ? url : "/"+url )
         request = {...(
             request instanceof CajaxRequest 
                 ? {...this.defaultRequestOptions,...request} 
