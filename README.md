@@ -1,4 +1,4 @@
-# CAJAX (*ClassedAjax*) 3.0.0
+# CAJAX (*ClassedAjax*) 3.0.1
 CajaxJS is an lightweight JS Http client for everyone!
 
 #### NPM
@@ -7,16 +7,16 @@ npm install cajaxjs
 ```
 
 ### CDN
-```
+```html
 <script src="https://cdn.jsdelivr.net/npm/cajaxjs@x/dist/cajax.js"></script>
 <!-- OR -->
-<script src="https://cdn.jsdelivr.net/npm/cajaxjs@3.0.0/dist/cajax.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cajaxjs@3.0.1/dist/cajax.js"></script>
 ```
 
 ## CDN (module, works for Deno too)
 test.js
 ```javascript
-import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.0/index.js'
+import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.1/index.js'
 
 new Cajax()
     .get("https://interaapps.de")
@@ -28,7 +28,7 @@ new Cajax()
 ## Example Usage
 ```js
 
-import { Cajax, CajaxRequest, CajaxResponse, FetchRequestProvider } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.0/index.js'
+import { Cajax, CajaxRequest, CajaxResponse, FetchRequestProvider } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.1/index.js'
 
 const client = new Cajax()
 
