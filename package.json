@@ -1,6 +1,6 @@
 {
   "name": "cajaxjs",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "CajaxJS is an lightweight JS Http client for everyone! (Promise support) ",
   "main": "index.js",
   "scripts": {
