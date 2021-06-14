@@ -73,8 +73,6 @@ class Cajax {
 
     get(url, query={}, request={}){
         request.query = query
-        console.log("YE");
-        console.log(query);
         return this.request("GET", url, request)
     }
 
