@@ -1,4 +1,4 @@
-# CAJAX (*ClassedAjax*) 3.0.2
+# CAJAX (*ClassedAjax*) 3.0.3
 CajaxJS is an lightweight JS Http client for everyone!
 
 #### NPM
@@ -10,13 +10,13 @@ npm install cajaxjs
 ```html
 <script src="https://cdn.jsdelivr.net/npm/cajaxjs@x/dist/cajax.js"></script>
 <!-- OR -->
-<script src="https://cdn.jsdelivr.net/npm/cajaxjs@3.0.2/dist/cajax.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cajaxjs@3.0.3/dist/cajax.js"></script>
 ```
 
 ## CDN (module, works for Deno too)
 test.js
 ```javascript
-import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.2/index.js'
+import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.3/index.js'
 
 new Cajax()
     .get("https://interaapps.de")
@@ -28,7 +28,7 @@ new Cajax()
 ## Example Usage
 ```js
 
-import { Cajax, CajaxRequest, CajaxResponse, FetchRequestProvider } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.2/index.js'
+import { Cajax, CajaxRequest, CajaxResponse, FetchRequestProvider } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.3/index.js'
 
 const client = new Cajax()
 
@@ -61,6 +61,24 @@ client.get("https://interaapps.de", {
 // Posting. The second parameter is the data
 client.post("https://interaapps.de", {
     hello: "world"
+})
+
+// File Upload
+const formData = new FormData()
+formData.append("file", document.getElementById("input").files[0])
+client.post("/upload", formData)
+    .then(res=>{
+        // ...
+    })
+
+
+// onProgress (Not supportet for FetchRequestProvider, use XHRHttpRequestProvider)
+client.get("https://interaapps.de", {
+    hello: "world"
+}, {
+    onProgress(event){
+        console.log(event.loaded+' of '+event.total)
+    }
 })
 ```
 

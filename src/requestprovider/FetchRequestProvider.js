@@ -36,14 +36,38 @@ class FetchRequestResponse extends CajaxResponse {
 }
 
 class FetchRequestProvider extends RequestProvider {
+    constructor(fetchFunction = null){
+        super()
+
+        this.fetchFunction = fetchFunction
+    }
+
     handle(method, url, data) {
         return new Promise((then, err)=>{
-            fetch(url, {
+            let headers = data.headers
+            if (data.contentType) {
+                headers = {'content-type':(data.contentType), ...data.headers};
+            }
+
+            const promise = (this.fetchFunction ? this.fetchFunction : window.fetch)(url, {
                 method,
-                headers: {'content-type':(data.contentType), ...data.headers},
+                headers: headers,
                 ...(data.body && (method != 'GET' && method != 'HEAD') ? {body: data.body} : {})
             }).then(res=>then(new FetchRequestResponse(res)))
-              .catch(err)
+                .catch(err)
+
+            if (data.timeout) {
+                Promise.race([
+                    promise,
+                    // Timeout Promise
+                    new Promise((_,err)=>{
+                        setTimeout(()=>{
+                            err(new Error("timeout"))
+                        }, data.timeout)
+                    })
+                ])
+            }
+            
         })
     }
 }

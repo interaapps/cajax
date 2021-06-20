@@ -3,6 +3,7 @@ class CajaxRequest {
         this.headers = {}
         this.query = {}
         this.body = null
+        this.timeout = null
     }
 
     setHeader(name, value){
@@ -35,6 +36,11 @@ class CajaxRequest {
 
     setBody(body){
         this.body = body
+        return this
+    }
+
+    setTimeout(milliSecounds){
+        this.timeout = milliSecounds
         return this
     }
 }

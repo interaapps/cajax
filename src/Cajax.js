@@ -3,7 +3,7 @@ import FetchRequestProvider from "./requestprovider/FetchRequestProvider.js"
 import XMLHttpRequestProvider from "./requestprovider/XMLHttpRequestProvider.js"
 
 class Cajax {
-    constructor(baseUrl = null, defaultRequestOptions={}){
+    constructor(baseUrl = null, defaultRequestOptions=(new CajaxRequest())){
         this.baseUrl = baseUrl
         this.promiseInterceptor = (promise)=>{
             return promise
@@ -11,10 +11,16 @@ class Cajax {
 
         this.defaultRequestOptions = defaultRequestOptions
 
-        if ('fetch' in window)
-            this.requestProvider = new FetchRequestProvider()
-        else
+        if (defaultRequestOptions.promiseInterceptor) {
+            this.promiseInterceptor = defaultRequestOptions.promiseInterceptor
+            defaultRequestOptions.promiseInterceptor = null
+        }
+
+
+        if ('XMLHttpRequest' in window)
             this.requestProvider = new XMLHttpRequestProvider()
+        else
+            this.requestProvider = new FetchRequestProvider()
     }
 
     request(method, url, request = {}){
@@ -40,9 +46,8 @@ class Cajax {
         }
 
         if (body instanceof FormData) {
-            request.body = data
-            if (!request.contentType)
-                request.contentType = "application/x-www-form-urlencoded"
+            // Fetch and XHR-HTTP-REQUEST usualy check ít and sets the correct Content-Type for it.
+            request.body = body
         } else if (typeof body == 'string') {
             request.body = data
         } else if (typeof body == 'object') {
@@ -128,7 +133,7 @@ class Cajax {
     }
 
     bearer(value){
-        this.defaultRequestOptions.headers["Authentication"] = "Bearer "+value
+        this.defaultRequestOptions.headers["Authorization"] = "Bearer "+value
         return this
     }
 }

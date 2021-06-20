@@ -35,24 +35,45 @@ class XMLHttpRequestResponse extends CajaxResponse {
 }
 
 class XMLHttpRequestProvider extends RequestProvider {
+    constructor(xmlHTTPRequestClass = null){
+        super()
+
+
+        if (!xmlHTTPRequestClass)
+            this.xmlHTTPRequestClass = XMLHttpRequest
+        else
+            this.xmlHTTPRequestClass = xmlHTTPRequestClass
+    }
+
     handle(method, url, data) {
         return new Promise((then, err)=>{
-            const xhr = new XMLHttpRequest();
+            const xhr = new this.xmlHTTPRequestClass();
 
             xhr.open(method, url);
-            xhr.setRequestHeader('content-type', data.contentType);
+            if (data.contentType)
+                xhr.setRequestHeader('content-type', data.contentType);
             
             for (const name in data.headers)
                 xhr.setRequestHeader(name, data.headers[name]);
             
-            xhr.send(data.body)
-            
             xhr.onload = () => {
                 then(new XMLHttpRequestResponse(xhr))
             }
+            
+            if (data.onDownloadProgress) 
+                xhr.onprogress = data.onDownloadProgress
+
+            if (xhr.upload && data.onUploadProgress) 
+                xhr.upload.onprogress = data.onUploadProgress
 
             xhr.onerror   = err
             xhr.onblocked = err
+            xhr.ontimeout = err
+            
+            if (data.timeout)
+                xhr.timeout = data.timeout
+                
+            xhr.send(data.body)
         })
     }
 }
