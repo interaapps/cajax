@@ -72,7 +72,7 @@ client.post("/upload", formData)
     })
 
 
-// onProgress (Not supportet for FetchRequestProvider, use XHRHttpRequestProvider)
+// onDownloadProgress (Not supportet for FetchRequestProvider, use XHRHttpRequestProvider)
 client.get("https://interaapps.de", {
     hello: "world"
 }, {
