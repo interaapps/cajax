@@ -112,7 +112,7 @@ client.promiseInterceptor = res => res.json()
 ## Typescript usage
 ```typescript
 new Cajax().get("https://interaapps.de")
-    .then(await (res: CajaxResponse) => {
+    .then(async (res: CajaxResponse) => {
         console.log("Hello "+(await res.json()).name)
     })
 ```
