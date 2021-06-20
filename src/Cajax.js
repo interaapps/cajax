@@ -38,7 +38,6 @@ class Cajax {
         if (request.query && typeof request.query == 'object' && Object.keys(request.query).length > 0) {
             if (!url.includes('?'))
                 url += '?'
-            console.log(request.query);
             var urlEncodedDataPairs = [];
             for(const name in request.query)
                 urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(request.query[name]));

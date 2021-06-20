@@ -76,7 +76,7 @@ client.post("/upload", formData)
 client.get("https://interaapps.de", {
     hello: "world"
 }, {
-    onProgress(event){
+    onDownloadProgress(event){
         console.log(event.loaded+' of '+event.total)
     }
 })
