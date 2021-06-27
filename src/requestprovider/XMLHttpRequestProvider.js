@@ -25,6 +25,10 @@ class XMLHttpRequestResponse extends CajaxResponse {
         return this.xhr.responseText
     }
 
+    async json(){
+        return JSON.parse(this.xhr.responseText)
+    }
+
     async res(){
         return this.xhr.response
     }
