@@ -2,15 +2,15 @@ import CajaxResponse from "../CajaxResponse.js";
 import RequestProvider from "./RequestProvder.js";
 
 class XMLHttpRequestResponse extends CajaxResponse {
-    constructor(response){
+    constructor(response) {
         super()
         this.xhr = response
-        
-        this.status     = response.status
+
+        this.status = response.status
         this.statusText = response.statusText
-        this.url        = response.responseURL
-        this.ok         = response.ok
-        
+        this.url = response.responseURL
+        this.ok = response.ok
+
         response.getAllResponseHeaders().trim().split(/[\r\n]+/).forEach((line) => {
             const parts = line.split(': ');
             const header = parts.shift();
@@ -21,25 +21,21 @@ class XMLHttpRequestResponse extends CajaxResponse {
         this.providerType = RequestProvider.Providers.XMLHTTPREQUEST
     }
 
-    async text(){
+    async text() {
         return this.xhr.responseText
     }
 
-    async json(){
-        return JSON.parse(this.xhr.responseText)
-    }
-
-    async res(){
+    async res() {
         return this.xhr.response
     }
 
-    header(name){
+    header(name) {
         return this.xhr.getResponseHeader(name)
     }
 }
 
 class XMLHttpRequestProvider extends RequestProvider {
-    constructor(xmlHTTPRequestClass = null){
+    constructor(xmlHTTPRequestClass = null) {
         super()
 
 
@@ -50,33 +46,33 @@ class XMLHttpRequestProvider extends RequestProvider {
     }
 
     handle(method, url, data) {
-        return new Promise((then, err)=>{
+        return new Promise((then, err) => {
             const xhr = new this.xmlHTTPRequestClass();
 
             xhr.open(method, url);
             if (data.contentType)
                 xhr.setRequestHeader('content-type', data.contentType);
-            
+
             for (const name in data.headers)
                 xhr.setRequestHeader(name, data.headers[name]);
-            
+
             xhr.onload = () => {
                 then(new XMLHttpRequestResponse(xhr))
             }
-            
-            if (data.onDownloadProgress) 
+
+            if (data.onDownloadProgress)
                 xhr.onprogress = data.onDownloadProgress
 
-            if (xhr.upload && data.onUploadProgress) 
+            if (xhr.upload && data.onUploadProgress)
                 xhr.upload.onprogress = data.onUploadProgress
 
-            xhr.onerror   = err
+            xhr.onerror = err
             xhr.onblocked = err
             xhr.ontimeout = err
-            
+
             if (data.timeout)
                 xhr.timeout = data.timeout
-                
+
             xhr.send(data.body)
         })
     }

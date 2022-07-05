@@ -1,45 +1,45 @@
 class CajaxRequest {
-    constructor(){
+    constructor() {
         this.headers = {}
         this.query = {}
         this.body = null
         this.timeout = null
     }
 
-    setHeader(name, value){
+    setHeader(name, value) {
         this.headers[name] = value
         return this
     }
-    
-    getHeader(name){
+
+    getHeader(name) {
         return this.headers[name]
     }
 
-    setHeaders(headers){
+    setHeaders(headers) {
         this.headers = headers
         return this
     }
 
-    addHeaders(headers){
+    addHeaders(headers) {
         this.headers = {...(this.headers), ...headers}
         return this
     }
 
-    setQueryParam(name, value){
+    setQueryParam(name, value) {
         this.query[name] = value
         return this
     }
-    
-    getQueryParam(name){
+
+    getQueryParam(name) {
         return this.query[name]
     }
 
-    setBody(body){
+    setBody(body) {
         this.body = body
         return this
     }
 
-    setTimeout(milliSecounds){
+    setTimeout(milliSecounds) {
         this.timeout = milliSecounds
         return this
     }

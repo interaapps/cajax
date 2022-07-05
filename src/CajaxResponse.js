@@ -1,24 +1,26 @@
 class CajaxResponse {
-    constructor(){
+    constructor() {
         this.headers = {}
-        this.status  = -1
+        this.status = -1
         this.statusText = ""
         this.ok = false
+
+        this.providerType = null
     }
 
-    async json(){
-        return {}
+    async json() {
+        return JSON.parse(await this.text())
     }
 
-    async text(){
+    async text() {
         return null
     }
 
-    async res(){
+    async res() {
         return null
     }
 
-    header(name){
+    header(name) {
         return null
     }
 }
