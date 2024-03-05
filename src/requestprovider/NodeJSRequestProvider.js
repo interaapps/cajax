@@ -35,6 +35,8 @@ class NodeJSRequestResponse extends CajaxResponse {
 }
 
 class NodeJSRequestProvider extends RequestProvider {
+    name = 'NODE_PROVIDER'
+
     constructor() {
         super()
         this.node = true
@@ -103,7 +105,7 @@ class NodeJSRequestProvider extends RequestProvider {
 
             if (usingFormData) {
                 data.body.pipe(req)
-            } else if (data.body && (method != 'GET' && method != 'HEAD')) {
+            } else if (data.body && (method !== 'GET' && method !== 'HEAD')) {
                 req.write(data.body)
             }
 

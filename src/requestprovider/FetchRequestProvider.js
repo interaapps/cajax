@@ -36,6 +36,8 @@ class FetchRequestResponse extends CajaxResponse {
 }
 
 class FetchRequestProvider extends RequestProvider {
+    name = 'FETCH_PROVIDER'
+
     constructor(fetchFunction = null) {
         super()
 
@@ -52,7 +54,7 @@ class FetchRequestProvider extends RequestProvider {
             const promise = (this.fetchFunction ? this.fetchFunction : window.fetch)(url, {
                 method,
                 headers: headers,
-                ...(data.body && (method != 'GET' && method != 'HEAD') ? {body: data.body} : {})
+                ...(data.body && (method !== 'GET' && method !== 'HEAD') ? {body: data.body} : {})
             }).then(res => then(new FetchRequestResponse(res)))
                 .catch(err)
 

@@ -1,4 +1,4 @@
-# CAJAX (*ClassedAjax*) 3.0.5p client for everyone!
+# CAJAX (*ClassedAjax*) 3.0.6 client for everyone!
 
 #### NPM
 ```bash
@@ -9,13 +9,13 @@ npm install cajaxjs
 ```html
 <script src="https://cdn.jsdelivr.net/npm/cajaxjs@x/dist/cajax.js"></script>
 <!-- OR -->
-<script src="https://cdn.jsdelivr.net/npm/cajaxjs@3.0.5/dist/cajax.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/cajaxjs@3.0.6/dist/cajax.js"></script>
 ```
 
 ## CDN (module, works for Deno too)
 test.js
 ```javascript
-import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.5/index.js'
+import { Cajax } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.6/index.js'
 
 new Cajax()
     .get("https://interaapps.de")
@@ -27,7 +27,7 @@ new Cajax()
 ## Example Usage
 ```js
 
-import { Cajax, CajaxRequest, CajaxResponse, FetchRequestProvider } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.5/index.js'
+import { Cajax, CajaxRequest, CajaxResponse, FetchRequestProvider } from 'https://cdn.jsdelivr.net/npm/cajaxjs@3.0.6/index.js'
 
 const client = new Cajax()
 
@@ -69,7 +69,6 @@ client.post("/upload", formData)
     .then(res=>{
         // ...
     })
-
 
 // onDownloadProgress (Not supportet for FetchRequestProvider, use XHRHttpRequestProvider)
 client.get("https://interaapps.de", {

@@ -8,6 +8,7 @@ a.append("hellonot", "world")
 
 const cajax = new Cajax()
 
+
 cajax.post("https://httpbin.org/post", a, {
     onDownloadProgress(e){
         console.log("DW", `${e.loaded} / ${e.total} ${ (e.loaded / e.total) * 100 }%`)

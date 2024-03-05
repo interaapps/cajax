@@ -35,6 +35,7 @@ class XMLHttpRequestResponse extends CajaxResponse {
 }
 
 class XMLHttpRequestProvider extends RequestProvider {
+    name = 'XML_HTTP_REQUEST_PROVIDER'
     constructor(xmlHTTPRequestClass = null) {
         super()
 

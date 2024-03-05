@@ -1,8 +1,17 @@
 class CajaxRequest {
     constructor() {
+        /**
+         * @type {{}}
+         */
         this.headers = {}
+        /**
+         * @type {{}}
+         */
         this.query = {}
         this.body = null
+        /**
+         * @type {null|number}
+         */
         this.timeout = null
     }
 

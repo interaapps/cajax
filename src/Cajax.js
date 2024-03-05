@@ -2,9 +2,17 @@ import CajaxRequest from "./CajaxRequest.js"
 import FetchRequestProvider from "./requestprovider/FetchRequestProvider.js"
 import XMLHttpRequestProvider from "./requestprovider/XMLHttpRequestProvider.js"
 
-class Cajax {
+export default class Cajax {
+    /**
+     * @param {string} baseUrl
+     * @param {CajaxRequest} defaultRequestOptions
+     */
     constructor(baseUrl = null, defaultRequestOptions = (new CajaxRequest())) {
         this.baseUrl = baseUrl
+        /**
+         * @param {function(Promise<CajaxResponse>)} promise
+         * @return {*}
+         */
         this.promiseInterceptor = (promise) => {
             return promise
         }
@@ -17,17 +25,25 @@ class Cajax {
         }
     }
 
+    /**
+     * @return {Promise<void>}
+     */
     async createRequestProvider() {
+        const denoOrBun = typeof Bun !== 'undefined' || typeof Deno !== 'undefined'
+
         if (typeof window !== 'undefined' && 'XMLHttpRequest' in window)
             this.requestProvider = new XMLHttpRequestProvider()
-        else if (typeof window !== 'undefined' && 'fetch' in window)
-            this.requestProvider = new FetchRequestProvider()
+        else if (typeof window !== 'undefined' && 'fetch' in window || denoOrBun)
+            this.requestProvider = new FetchRequestProvider(denoOrBun ? fetch : null)
         else if (typeof process !== 'undefined')
             this.requestProvider = new (await import("../src/requestprovider/NodeJSRequestProvider.js")).default
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @param {(string | 'GET' | 'POST' | 'PUT' | 'PATCH' | 'CONNECT' | 'DELETE' | 'TRACE' | 'HEAD' | 'OPTIONS')} method
+     * @param {string} url
+     * @param {*} request
+     * @returns {Promise<CajaxResponse|*>}
      */
     async request(method, url, request = {}) {
         // Sets a request provider if none is given
@@ -51,7 +67,7 @@ class Cajax {
                 url += '?'
             const urlEncodedDataPairs = [];
             for (const name in request.query)
-                urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(request.query[name]));
+                urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(request.query[name])}`);
             url += urlEncodedDataPairs.join('&').replace(/%20/g, '+');
         }
 
@@ -64,12 +80,12 @@ class Cajax {
             if (!request.contentType)
                 request.contentType = "application/json"
 
-            if (request.contentType == "application/json") {
+            if (request.contentType === "application/json") {
                 request.body = JSON.stringify(body)
-            } else if (request.contentType == "application/x-www-form-urlencoded") {
+            } else if (request.contentType === "application/x-www-form-urlencoded") {
                 const urlEncodedDataPairs = [];
                 for (const name in body)
-                    urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(body[name]));
+                    urlEncodedDataPairs.push(`${encodeURIComponent(name)}=${encodeURIComponent(body[name])}`);
                 request.body = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
             }
         }
@@ -86,7 +102,7 @@ class Cajax {
 
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     get(url, query = {}, request = {}) {
         request.query = query
@@ -94,7 +110,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     delete(url, query = {}, request = {}) {
         request.query = query
@@ -102,7 +118,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     post(url, body = null, request = {}) {
         request.body = body
@@ -110,7 +126,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     put(url, body = null, request = {}) {
         request.body = body
@@ -118,7 +134,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     connect(url, body = null, request = {}) {
         request.body = body
@@ -126,7 +142,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     head(url, body = null, request = {}) {
         request.body = body
@@ -134,7 +150,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     patch(url, body = null, request = {}) {
         request.body = body
@@ -142,7 +158,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     options(url, body = null, request = {}) {
         request.body = body
@@ -150,7 +166,7 @@ class Cajax {
     }
 
     /**
-     * @returns {Promise<CajaxResponse>}
+     * @returns {Promise<CajaxResponse|*>}
      */
     trace(url, body = null, request = {}) {
         request.body = body
@@ -158,6 +174,8 @@ class Cajax {
     }
 
     /**
+     * @param {string} name
+     * @param {*} value
      * @returns {Cajax}
      */
     setHeader(name, value) {
@@ -166,6 +184,7 @@ class Cajax {
     }
 
     /**
+     * @param {string} value
      * @returns {Cajax}
      */
     setContentType(value) {
@@ -174,12 +193,11 @@ class Cajax {
     }
 
     /**
+     * @param {string} value
      * @returns {Cajax}
      */
     bearer(value) {
-        this.defaultRequestOptions.headers["Authorization"] = "Bearer " + value
+        this.defaultRequestOptions.headers["Authorization"] = `Bearer ${value}`
         return this
     }
 }
-
-export default Cajax
