@@ -35,8 +35,6 @@ export default class Cajax {
             this.requestProvider = new XMLHttpRequestProvider()
         else if (typeof window !== 'undefined' && 'fetch' in window || denoOrBun)
             this.requestProvider = new FetchRequestProvider(denoOrBun ? fetch : null)
-        else if (typeof process !== 'undefined')
-            this.requestProvider = new (await import("../src/requestprovider/NodeJSRequestProvider.js")).default
     }
 
     /**
